@@ -17,7 +17,7 @@ http {
         listen          [::]:${HTTPS_PORT} ssl;
         server_name     ${SERVER_NAME};
         ssl on;
-        ssl_certificate /server.crt;
+        ssl_certificate /server.chained.crt;
         ssl_certificate_key /server.key;
 
         # SSL settings: https://raymii.org/s/tutorials/Strong_SSL_Security_On_nginx.html
