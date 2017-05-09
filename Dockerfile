@@ -4,4 +4,4 @@ FROM nginx:mainline
 COPY            / /
 
 # Set script to executable
-RUN             chmod +x set-nginx-env.sh
+RUN             chmod +x run-nginx.sh
