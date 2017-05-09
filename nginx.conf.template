@@ -9,7 +9,7 @@ http {
         listen          ${HTTP_PORT};
         listen          [::]:${HTTP_PORT};
         server_name     ${SERVER_NAME};
-        return          301 https://localhost${DOLLAR}request_uri;
+        return          301 https://${SERVER_NAME}${DOLLAR}request_uri;
     }
 
     server {
