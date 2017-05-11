@@ -6,9 +6,6 @@ events {
 
 http {
     server {
-        include       /etc/nginx/mime.types;
-        default_type  application/octet-stream;
-
         listen          ${HTTP_PORT};
         listen          [::]:${HTTP_PORT};
         server_name     ${SERVER_NAME};
@@ -16,9 +13,6 @@ http {
     }
 
     server {
-        include       /etc/nginx/mime.types;
-        default_type  application/octet-stream;
-
         listen          ${HTTPS_PORT} ssl;
         listen          [::]:${HTTPS_PORT} ssl;
         server_name     ${SERVER_NAME};
