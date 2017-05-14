@@ -5,6 +5,8 @@ events {
 }
 
 http {
+    resolver 127.0.0.11 ipv6=off;
+
     server {
         listen          ${HTTP_PORT};
         listen          [::]:${HTTP_PORT};
