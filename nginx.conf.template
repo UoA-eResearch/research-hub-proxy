@@ -6,16 +6,16 @@ events {
 
 http {
     server {
-        listen          ${HTTP_PORT};
-        listen          [::]:${HTTP_PORT};
-        server_name     ${SERVER_NAME};
-        return          301 https://${SERVER_NAME}:${HTTPS_PORT}${DOLLAR}request_uri;
+        listen          ${PROXY_HTTP_PORT};
+        listen          [::]:${PROXY_HTTP_PORT};
+        server_name     ${PROXY_SERVER_NAME};
+        return          301 https://${PROXY_SERVER_NAME}:${PROXY_HTTPS_PORT}${DOLLAR}request_uri;
     }
 
     server {
-        listen          ${HTTPS_PORT} ssl;
-        listen          [::]:${HTTPS_PORT} ssl;
-        server_name     ${SERVER_NAME};
+        listen          ${PROXY_HTTPS_PORT} ssl;
+        listen          [::]:${PROXY_HTTPS_PORT} ssl;
+        server_name     ${PROXY_SERVER_NAME};
         ssl on;
         ssl_certificate /server.chained.crt;
         ssl_certificate_key /server.key;
