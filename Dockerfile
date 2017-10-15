@@ -1,5 +1,8 @@
 FROM nginx:mainline
 
+ARG         http_proxy
+ARG         https_proxy
+
 # Copies all files and maintains directory structure
 COPY            / /
 
