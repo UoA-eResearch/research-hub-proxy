@@ -38,7 +38,8 @@
                          entityID="research-hub-dev.cer.auckland.ac.nz"
                          homeURL="/"
                          REMOTE_USER="eppn persistent-id targeted-id"
-                         signing="false" encryption="false">
+                         signing="false" encryption="false"
+			 attributePrefix="AJP_">
         <!--
         Controls session lifetimes, address checks, cookie handling, and the protocol handlers.
         You MUST supply an effectively unique handlerURL value for each of your applications.
@@ -76,7 +77,7 @@
             <Handler type="Status" Location="/Status" acl="127.0.0.1 ::1"/>
 
             <!-- Session diagnostic service. -->
-            <Handler type="Session" Location="/Session" showAttributeValues="false"/>
+            <Handler type="Session" Location="/Session" showAttributeValues="true" contentType="application/json"/>
 
             <!-- JSON feed of discovery information. -->
             <Handler type="DiscoveryFeed" Location="/DiscoFeed"/>
