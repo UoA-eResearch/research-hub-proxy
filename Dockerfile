@@ -29,3 +29,6 @@ RUN         service shibd restart
 # Copy apache configuration files
 COPY        /httpd.conf /usr/local/apache2/conf/httpd.conf
 COPY        conf.d /usr/local/apache2/conf/conf.d
+
+COPY        run.sh /run.sh
+RUN         chmod +x /run.sh
