@@ -12,10 +12,10 @@ RUN         apt-get update && apt-get install -y \
 		        vim \
 		        curl
 
-# Generate shibboleth key
-# If app has been registered with a specific key this should be made available to the container instead
-RUN         shib-keygen -h research-hub-dev.cer.auckland.ac.nz
+# Optional - generate shibboleth key: shib-keygen -h research-hub-dev.cer.auckland.ac.nz
+# We mount a pre generated cert / key in research-hub-deploy/docker-compose.front-end.yml
 
+# Copy shibboleth files
 RUN         mkdir /etc/shibboleth/metadata
 
 COPY        shibboleth2.xml /etc/shibboleth
