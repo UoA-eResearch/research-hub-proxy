@@ -32,3 +32,5 @@ COPY        conf.d /usr/local/apache2/conf/conf.d
 
 COPY        run.sh /run.sh
 RUN         chmod +x /run.sh
+
+CMD         ["/run.sh"]
