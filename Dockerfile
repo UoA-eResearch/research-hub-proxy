@@ -10,21 +10,17 @@ EXPOSE      80 443
 RUN         apt-get update && apt-get install -y \
 		        libapache2-mod-shib2 \
 		        vim \
-		        curl
-
-# Optional - generate shibboleth key: shib-keygen -h research-hub-dev.cer.auckland.ac.nz
-# We mount a pre generated cert / key in research-hub-deploy/docker-compose.front-end.yml
+		        curl \
+                gettext-base
 
 # Copy shibboleth files
 RUN         mkdir /etc/shibboleth/metadata
 
-COPY        shibboleth2.xml /etc/shibboleth
-RUN         chmod 644 /etc/shibboleth/shibboleth2.xml
+COPY        shibboleth2.xml /
+RUN         chmod 644 /shibboleth2.template.xml
 
 COPY        attribute-map.xml /etc/shibboleth
 RUN         chmod 644 /etc/shibboleth/attribute-map.xml
-
-RUN         service shibd restart
 
 # Copy apache configuration files
 COPY        /httpd.conf /usr/local/apache2/conf/httpd.conf

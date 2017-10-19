@@ -21,7 +21,7 @@
 
     <RequestMapper type="Native">
       <RequestMap applicationId="default">
-        <Host name="research-hub-dev.cer.auckland.ac.nz" authType="shibboleth" requireSession="true">
+        <Host name="${PROXY_SERVER_NAME}" authType="shibboleth" requireSession="true">
           <AccessControl>
           <OR>
             <Rule require="authnContextClassRef">urn:uoa:SAML:2.0:ac:level:2</Rule>
@@ -35,7 +35,7 @@
     <!-- The ApplicationDefaults element is where most of Shibboleth's SAML bits are defined. -->
     <ApplicationDefaults id="default" 
                          policyId="default"
-                         entityID="research-hub-dev.cer.auckland.ac.nz"
+                         entityID="${PROXY_SERVER_NAME}"
                          homeURL="/"
                          REMOTE_USER="eppn persistent-id targeted-id"
                          signing="false" encryption="false"
