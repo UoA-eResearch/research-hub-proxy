@@ -16,7 +16,7 @@ RUN         apt-get update && apt-get install -y \
 # Copy shibboleth files
 RUN         mkdir /etc/shibboleth/metadata
 
-COPY        shibboleth2.xml /
+COPY        shibboleth2.template.xml /
 RUN         chmod 644 /shibboleth2.template.xml
 
 COPY        attribute-map.xml /etc/shibboleth
