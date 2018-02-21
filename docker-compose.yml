@@ -1,0 +1,24 @@
+version: '3.0'
+services:
+  proxy:
+    build:
+       context: ./research-hub-proxy/
+       args:
+           - http_proxy
+           - https_proxy
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ${DATA_DIR}/config/server-ca.crt:/usr/local/apache2/conf/keys/server-ca.crt
+      - ${DATA_DIR}/config/server.crt:/usr/local/apache2/conf/keys/server.crt
+      - ${DATA_DIR}/config/server.key:/usr/local/apache2/conf/keys/server.key
+      - ${DATA_DIR}/config/sp-cert.pem:/etc/shibboleth/sp-cert.pem
+      - ${DATA_DIR}/config/sp-key.pem:/etc/shibboleth/sp-key.pem
+    environment:
+      - PROXY_SERVER_NAME=${PROXY_SERVER_NAME}
+      - PROXY_IDP_HOSTNAME=${PROXY_IDP_HOSTNAME}
+    depends_on:
+      - "web"
+      - "api"
+    restart: always
