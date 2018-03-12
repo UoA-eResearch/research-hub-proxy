@@ -10,9 +10,9 @@ services:
       - "80:80"
       - "443:443"
     volumes:
-      - ${DATA_DIR}/config/server-ca.crt:/usr/local/apache2/conf/keys/server-ca.crt
-      - ${DATA_DIR}/config/server.crt:/usr/local/apache2/conf/keys/server.crt
-      - ${DATA_DIR}/config/server.key:/usr/local/apache2/conf/keys/server.key
+      #- ${DATA_DIR}/config/server-ca.crt:/usr/local/apache2/conf/keys/server-ca.crt
+      #- ${DATA_DIR}/config/server.crt:/usr/local/apache2/conf/keys/server.crt
+      #- ${DATA_DIR}/config/server.key:/usr/local/apache2/conf/keys/server.key
       - ${DATA_DIR}/config/sp-cert.pem:/etc/shibboleth/sp-cert.pem
       - ${DATA_DIR}/config/sp-key.pem:/etc/shibboleth/sp-key.pem
     environment:
