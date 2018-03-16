@@ -1,9 +1,9 @@
 <SPConfig xmlns="urn:mace:shibboleth:2.0:native:sp:config"
-          xmlns:conf="urn:mace:shibboleth:2.0:native:sp:config"
-          xmlns:saml="urn:oasis:names:tc:SAML:2.0:assertion"
-          xmlns:samlp="urn:oasis:names:tc:SAML:2.0:protocol"
-          xmlns:md="urn:oasis:names:tc:SAML:2.0:metadata"
-          clockSkew="180">
+    xmlns:conf="urn:mace:shibboleth:2.0:native:sp:config"
+    xmlns:saml="urn:oasis:names:tc:SAML:2.0:assertion"
+    xmlns:samlp="urn:oasis:names:tc:SAML:2.0:protocol"    
+    xmlns:md="urn:oasis:names:tc:SAML:2.0:metadata"
+    clockSkew="180">
 
     <!--
     By default, in-memory StorageService, ReplayCache, ArtifactMap, and SessionCache
@@ -20,26 +20,26 @@
     -->
 
     <RequestMapper type="Native">
-        <RequestMap applicationId="default">
-            <Host name="${PROXY_SERVER_NAME}" authType="shibboleth" requireSession="true">
-                <AccessControl>
-                    <OR>
-                        <Rule require="authnContextClassRef">urn:uoa:SAML:2.0:ac:level:2</Rule>
-                        <Rule require="authnContextClassRef">urn:uoa:SAML:2.0:ac:level:3</Rule>
-                    </OR>
-                </AccessControl>
-            </Host>
-        </RequestMap>
+      <RequestMap applicationId="default">
+        <Host name="${PROXY_SERVER_NAME}" authType="shibboleth" requireSession="true">
+          <AccessControl>
+          <OR>
+            <Rule require="authnContextClassRef">urn:uoa:SAML:2.0:ac:level:2</Rule>
+            <Rule require="authnContextClassRef">urn:uoa:SAML:2.0:ac:level:3</Rule>
+          </OR>
+          </AccessControl>
+        </Host>
+      </RequestMap>
     </RequestMapper>
 
     <!-- The ApplicationDefaults element is where most of Shibboleth's SAML bits are defined. -->
-    <ApplicationDefaults id="default"
+    <ApplicationDefaults id="default" 
                          policyId="default"
                          entityID="https://${PROXY_SERVER_NAME}"
                          homeURL="/"
                          REMOTE_USER="eppn persistent-id targeted-id"
-                         signing="false" encryption="false"
-                         attributePrefix="AJP_">
+                         signing="true" encryption="false"
+			 attributePrefix="AJP_">
         <!--
         Controls session lifetimes, address checks, cookie handling, and the protocol handlers.
         You MUST supply an effectively unique handlerURL value for each of your applications.
@@ -50,7 +50,7 @@
         security of your site. Stealing sessions via cookie theft is much easier with this disabled.
         -->
         <Sessions lifetime="28800" timeout="3600" relayState="ss:mem"
-                  checkAddress="false" handlerSSL="false" cookieProps="https">
+                  checkAddress="false" handlerSSL="false" cookieProps="http">
 
             <!--
             Configures SSO for a default IdP. To allow for >1 IdP, remove
@@ -64,14 +64,15 @@
                  template="bindingTemplate.html"
                  id="Intranet" isDefault="true" type="Chaining"
                  Location="/Login" relayState="cookie">
-                SAML2 SAML1
+                    SAML2 SAML1
             </SSO>
 
             <!-- SAML and local-only logout. -->
             <Logout>SAML2 Local</Logout>
-
+            
             <!-- Extension service that generates "approximate" metadata based on SP configuration. -->
-            <Handler type="MetadataGenerator" Location="/Metadata" signing="false" https="true" http="false" />
+            <!--<Handler type="MetadataGenerator" Location="/Metadata" signing="false" https="true" http="false" />-->
+            <Handler type="MetadataGenerator" Location="/Metadata" signing="false" https="false" http="true" />
 
             <!-- Status reporting service. -->
             <Handler type="Status" Location="/Status" acl="127.0.0.1 ::1"/>
@@ -88,9 +89,9 @@
         also add attributes with values that can be plugged into the templates.
         -->
         <Errors supportContact="root@localhost"
-                helpLocation="/about.html"
-                styleSheet="/shibboleth-sp/main.css"/>
-
+            helpLocation="/about.html"
+            styleSheet="/shibboleth-sp/main.css"/>
+        
         <!-- Example of remotely supplied batch of signed metadata. -->
         <!--
         <MetadataProvider type="XML" uri="http://federation.org/federation-metadata.xml"
@@ -112,7 +113,7 @@
 
         <!-- Map to extract attributes from SAML assertions. -->
         <AttributeExtractor type="XML" validate="true" reloadChanges="false" path="attribute-map.xml"/>
-
+        
         <!-- Use a SAML query if no attributes are supplied during SSO. -->
         <AttributeResolver type="Query" subjectMatch="true"/>
 
@@ -135,7 +136,7 @@
         <ApplicationOverride id="admin" entityID="https://admin.example.org/shibboleth"/>
         -->
     </ApplicationDefaults>
-
+    
     <!-- Policies that determine how to process and authenticate runtime messages. -->
     <SecurityPolicyProvider type="XML" validate="true" path="security-policy.xml"/>
 
