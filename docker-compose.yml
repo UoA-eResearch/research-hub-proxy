@@ -12,4 +12,4 @@ services:
     volumes:
       - ${HUB_PATH}/config/proxy/sp-cert.pem:/etc/shibboleth/sp-cert.pem
       - ${HUB_PATH}/config/proxy/sp-key.pem:/etc/shibboleth/sp-key.pem
-      - ${HUB_PATH}/config/proxy/environment-conf:/usr/local/apache2/conf/conf.d/environment
+      - ${HUB_PATH}/config/proxy/conf-environment:/usr/local/apache2/conf/conf.d/environment
