@@ -20,7 +20,7 @@ pipeline {
                    docker-compose                        \\
                      -f docker-compose.yml               \\
                      -f docker-compose.ci.yml            \\
-                     build --no-cache proxy
+                     build --no-cache --pull proxy
                    '''
             }
           
