@@ -8,7 +8,7 @@ EXPOSE      80 443
 
 # Install dependencies
 RUN         apt-get update && apt-get install -y \
-		        libapache2-mod-shib2 \
+		        libapache2-mod-shib \
 		        vim \
 		        curl \
                 gettext-base
